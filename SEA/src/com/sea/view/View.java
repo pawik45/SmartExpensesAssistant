@@ -13,6 +13,31 @@ public class View {
 		this.manager = manager;
 	}
 	
+	public  void displayWelcome(){
+		System.out.println("Welcome to Smart Expenses Assistant!\n");
+	}
+	
+	public void displaySelectTimeFrame(){
+		System.out.println("If you want "
+				+ "to control your expenses, choose the weekly control or "
+				+ "monthly control option.\n"
+				+ "1 - weekly \n"
+				+ "2 - monthly \n"
+				+ "3 - quit");
+		
+		
+	}
+	
+	public void displayGeneralMenu(){
+		System.out.println("\nSelect what you want doing: ");
+		System.out.println("1 - Add new expense.");
+		System.out.println("2 - Edit expense.");
+		System.out.println("3 - Category menu.");
+		System.out.println("4 - Display historical expenses.");
+		System.out.println("5 - Check expenses balance.");
+		System.out.println("6 - Quit.");
+	}
+	
 	public void displayCategoriesMenu(){
 		System.out.println("\nSelect what you want doing: ");
 		System.out.println("1 - Add new Category to your expenses.");
@@ -53,8 +78,34 @@ public class View {
 	public void createCategoryAgain() {
 		System.out.println("Please, try again");
 	}
+	public void createExpenseName() {
+		System.out.println("Please enter name of expense.");
+	}
+	
+	public void chooseExpenseCategory() {
+		System.out.println("Please enter number of category of your expense.");
+	}
+	public void createExpenseDate() {
+		System.out.println("Please enter date of your expense in format dd-mm-yyyy.");
+	}
+	
+	public void createExpensePrice() {
+		System.out.println("Please enter price of your expense.");
+	}
+	
+	
+	public void createExpenseAgain() {
+		System.out.println("Please, try again");
+	}
 	
 	public void selectCategoryNb() {
 		System.out.println("\nPlease select number of category.");
+	}
+	
+	public void warningLimit() {
+		System.out.println("Warning: you past exceeded the limit.");
+	}
+	public void warningNearLimit() {
+		System.out.println("Warning: you are near the limit.");
 	}
 }
