@@ -47,6 +47,7 @@ public class Controller {
 		 * view.displayCategorySummary(); view.displayGeneralBalance();
 		 * view.displayExpensesSummary(0); view.displayCategoryBalance(0);
 		 */
+		welcomeMenu(in);
 
 	}
 	
@@ -175,7 +176,7 @@ public class Controller {
 
 		case '2':
 			view.chosing(2);
-			//////////////
+			EditExpense(in);
 			break;
 
 		case '3':
@@ -185,13 +186,13 @@ public class Controller {
 
 		case '4':
 			view.chosing(4);
-			//////
+			view.printAllExpenses();
 			generalMenu(in);
 			break;
 
 		case '5':
 			view.chosing(5);
-			//////
+			view.displayGeneralBalance();
 			generalMenu(in);
 			break;
 
@@ -324,4 +325,98 @@ public class Controller {
 		manager.getCategoryList().get(categoryNum).changeLimit(limit);
 		categoryMenu(in);
 	}
+	
+	public void EditExpense(BufferedReader in) throws IOException {
+		view.displayCategorySummary();
+		view.chooseExpenseCategory();
+		int categoryNum=1000;
+		String name;
+		double price=0;
+		String date;
+		
+		do {
+			try {
+				String newNum = in.readLine().trim();
+				if (!newNum.equals("")) {
+					categoryNum = Integer.parseInt(newNum);
+				}
+				if (categoryNum < 0) {
+					view.createCategoryAgain();
+					categoryNum =1000;
+				}
+				if (categoryNum > manager.getCategoryList().size()) {
+					view.createCategoryAgain();
+					categoryNum = 1000;
+				}
+			} catch (NumberFormatException e) {
+				view.createCategoryAgain();
+			}
+		} while (categoryNum == 1000);
+		
+		view.displayExpensesSummary(categoryNum);
+		view.editExpense();
+		
+		int expenseNum=1000;
+		
+		do {
+			try {
+				String newNum = in.readLine().trim();
+				if (!newNum.equals("")) {
+					expenseNum = Integer.parseInt(newNum);
+				}
+				if (expenseNum < 0) {
+					view.createCategoryAgain();
+					expenseNum =1000;
+				}
+				if (expenseNum > manager.getCategoryList().get(categoryNum).getExpensesList().size()) {
+					view.createCategoryAgain();
+					expenseNum = 1000;
+				}
+			} catch (NumberFormatException e) {
+				view.createCategoryAgain();
+			}
+		} while (categoryNum == 1000);
+		
+		view.createExpenseName();
+		
+		do {
+			name = in.readLine().trim();
+			if (name.length() < 1) {
+				view.createExpenseAgain();
+			}
+		} while (name.length() < 1);
+		
+
+		view.createExpenseDate();
+
+		do {
+			date = in.readLine().trim();
+			if (date.length() < 10) {
+				view.createExpenseAgain();
+			}
+		} while (date.length() < 10);
+		
+		view.createExpensePrice();
+		do {
+			try {
+				String stringPrice = in.readLine().trim();
+				if (!stringPrice.equals("")) {
+					price = Double.parseDouble(stringPrice);
+				}
+
+				if (price < 0) {
+					view.createExpenseAgain();
+					price = 0;
+				}
+			} catch (NumberFormatException e) {
+				view.createExpenseAgain();
+			}
+		} while (price == 0);
+		
+		manager.getCategoryList().get(categoryNum).getExpensesList().get(expenseNum).changeName(name);
+		manager.getCategoryList().get(categoryNum).getExpensesList().get(expenseNum).changeDate(date);
+		manager.getCategoryList().get(categoryNum).getExpensesList().get(expenseNum).changeValue(price);
+		generalMenu(in);
+	}
+
 }

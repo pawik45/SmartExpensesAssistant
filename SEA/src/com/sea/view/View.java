@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.sea.model.Category;
 import com.sea.model.CategoryManager;
+import com.sea.model.Expense;
 
 public class View {
 
@@ -108,4 +109,37 @@ public class View {
 	public void warningNearLimit() {
 		System.out.println("Warning: you are near the limit.");
 	}
+	
+	public void printAllExpenses() {
+		for (int i = 0; i < this.manager.getCategoryList().size(); i++) { 
+			
+			for(int j =0; j<this.manager.getCategoryList().get(i).getExpensesList().size();j++) {
+				System.out.println(this.manager.getCategoryList().get(i).getExpensesList().get(j).getDate()+ " " +
+				this.manager.getCategoryList().get(i).getExpensesList().get(j).getName()+ " "+
+				this.manager.getCategoryList().get(i).getExpensesList().get(j).getValue());
+			}
+		}
+			
+	} 
+	
+	public void displayGeneralBalance() {
+		
+		System.out.println("the general balance of all expenses: " + Double.toString(manager.getGeneralBalance()));
+	}
+	
+	public void displayExpensesSummary(int id) {
+		
+		ArrayList<Expense> categoryList = manager.getCategoryList().get(id).getExpensesList();
+		
+		for (int i = 0; i < categoryList.size(); i++) {
+			
+			System.out.println(i+". "+categoryList.get(i).getDate()+" "+categoryList.get(i).getName()+" value: "+categoryList.get(i).getValue());
+		}
+		
+	}
+	
+	public void editExpense() {
+		System.out.println("Please, write a number of expense, which you want editing. ");
+	}
+	
 }
