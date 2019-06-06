@@ -20,9 +20,9 @@ public class Controller {
 		boolean timeToQuit = false;
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		do {
+		/*do {
 			timeToQuit = quit;
-		} while (!timeToQuit);
+		} while (!timeToQuit);*/
 
 		this.manager = manager;
 		this.view = view;
