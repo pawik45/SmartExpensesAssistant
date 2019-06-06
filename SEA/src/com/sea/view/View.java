@@ -24,13 +24,13 @@ public class View {
 				+ "monthly control option.\n"
 				+ "1 - weekly \n"
 				+ "2 - monthly \n"
-				+ "3 - quit");
+				);
 		
 		
 	}
 	
 	public void displayGeneralMenu(){
-		System.out.println("\nSelect what you want doing: ");
+		System.out.println("\nSelect what you want to do: ");
 		System.out.println("1 - Add new expense.");
 		System.out.println("2 - Edit expense.");
 		System.out.println("3 - Category menu.");
@@ -40,7 +40,7 @@ public class View {
 	}
 	
 	public void displayCategoriesMenu(){
-		System.out.println("\nSelect what you want doing: ");
+		System.out.println("\nSelect what you want to do: ");
 		System.out.println("1 - Add new Category to your expenses.");
 		System.out.println("2 - Display all categories.");
 		System.out.println("3 - Change limit of category.");
@@ -106,8 +106,9 @@ public class View {
 	public void warningLimit() {
 		System.out.println("Warning: you past exceeded the limit.");
 	}
-	public void warningNearLimit() {
-		System.out.println("Warning: you are near the limit.");
+	public void warningNearLimit(int catNum) {
+		double diff = manager.getCategoryList().get(catNum).getLimit()-manager.getCategoryList().get(catNum).getBalance();
+		System.out.println("Warning: you are near the limit. You have "+diff+" left");
 	}
 	
 	public void printAllExpenses() {
@@ -140,6 +141,14 @@ public class View {
 	
 	public void editExpense() {
 		System.out.println("Please, write a number of expense, which you want editing. ");
+	}
+	
+	public void chooseWeekly() {
+		System.out.println("You choose weekly.");
+	}
+	
+	public void chooseMonthly() {
+		System.out.println("You choose monthly.");
 	}
 	
 }

@@ -11,12 +11,11 @@ import com.sea.view.View;
 
 public class Controller {
 	
-	public View view;
-	public CategoryManager manager;
-	public Expense expense;
-	public boolean quit = true;
+	private View view;
+	private CategoryManager manager;
+	private boolean quit = true;
 
-	public Controller() throws IOException {
+	public Controller(CategoryManager manager,View view) throws IOException {
 
 		boolean timeToQuit = false;
 
@@ -25,22 +24,22 @@ public class Controller {
 			timeToQuit = quit;
 		} while (!timeToQuit);
 
-		manager = new CategoryManager();
-		view = new View(manager);
+		this.manager = manager;
+		this.view = view;
 
-		manager.addCategory("jedzenie", 400);
-		manager.addCategory("ubrania", 300);
-		manager.addCategory("uczelnia", 100);
+		this.manager.addCategory("jedzenie", 400);
+		this.manager.addCategory("ubrania", 500);
+		this.manager.addCategory("uczelnia", 100);
 
-		Category jedzenie = manager.getCategoryList().get(0);
-		jedzenie.AddExpense("spo퓓wcze I", "12-06-19", 40);
-		jedzenie.AddExpense("spo퓓wcze II", "13-06-19", 20);
-		jedzenie.AddExpense("spo퓓wcze III", "14-06-19", 18.45);
+		Category jedzenie = this.manager.getCategoryList().get(0);
+		jedzenie.AddExpense("spo퓓wcze I", "03-06-2019", 40);
+		jedzenie.AddExpense("spo퓓wcze II", "04-06-2019", 20);
+		jedzenie.AddExpense("spo퓓wcze III", "05-06-2019", 18.45);
 
-		Category ubrania = manager.getCategoryList().get(1);
-		ubrania.AddExpense("koszulka", "11-06-19", 50.50);
-		ubrania.AddExpense("spodnie", "12-06-19", 120);
-		ubrania.AddExpense("buty", "12-06-19", 185.99);
+		Category ubrania = this.manager.getCategoryList().get(1);
+		ubrania.AddExpense("koszulka", "01-06-2019", 50.50);
+		ubrania.AddExpense("spodnie", "02-06-2019", 120);
+		ubrania.AddExpense("buty", "05-06-2019", 185.99);
 
 		//////////
 		/*
@@ -146,9 +145,7 @@ public class Controller {
 			System.out.println("You choose monthly.");
 			flag=false;
 			break;
-		case '3':
-			break;
-
+			
 		}
 		}while(flag);
 		
@@ -269,7 +266,7 @@ public class Controller {
 		manager.getCategoryList().get(categoryNum).AddExpense(name, date, price);
 		
 		if(manager.getCategoryList().get(categoryNum).getLimit()-manager.getCategoryList().get(categoryNum).getBalance()<=50) {
-			view.warningNearLimit();
+			view.warningNearLimit(categoryNum);
 		}
 		if(manager.getCategoryList().get(categoryNum).getLimit()<manager.getCategoryList().get(categoryNum).getBalance()) {
 			view.warningLimit();
